@@ -15,6 +15,7 @@ namespace CarStartAndStop
         static bool command;
         static void Main(string[] args)
         {
+            string a = CarStatus.START.ToString();
             string userCommand = string.Empty;
             presentCarState = PresentCarStatus();
 
@@ -24,7 +25,7 @@ namespace CarStartAndStop
                 Console.Write(Messages.UserMessage);
                 userCommand = Console.ReadLine().ToUpper();
 
-                if (userCommand == "START")
+                if (userCommand == CarStatus.START.ToString())
                 {
 
                     command = true;
@@ -39,7 +40,7 @@ namespace CarStartAndStop
                         MarkStatusToFile(command);
                     }
                 }
-                else if (userCommand == "STOP")
+                else if (userCommand == CarStatus.STOP.ToString())
                 {
 
                     command = false;
@@ -54,7 +55,7 @@ namespace CarStartAndStop
                         MarkStatusToFile(command);
                     }
                 }
-                else if (userCommand == "EXIT")
+                else if (userCommand == CarStatus.EXIT.ToString())
                 {
                     Environment.Exit(0);
                 }
@@ -66,18 +67,18 @@ namespace CarStartAndStop
         {
             if (!File.Exists(statusStorageFilePath) && status == true)
             {
-                File.WriteAllText(statusStorageFilePath, "Started");
+                File.WriteAllText(statusStorageFilePath, CarStatus.START.ToString());
             }
             else
             {
-                File.WriteAllText(statusStorageFilePath, "Stopped");
+                File.WriteAllText(statusStorageFilePath, CarStatus.STOP.ToString());
             }
         }
         static private bool PresentCarStatus()
         {
             if (File.Exists(statusStorageFilePath))
             {
-                if (File.ReadAllText(statusStorageFilePath) == "Started")
+                if (File.ReadAllText(statusStorageFilePath) == CarStatus.START.ToString())
                 {
                     return true;
                 }
