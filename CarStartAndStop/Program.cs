@@ -21,7 +21,7 @@ namespace CarStartAndStop
             while (1 == 1)
             {
                 Console.Clear();
-                Console.Write("Enter Command: ");
+                Console.Write(Messages.UserMessage);
                 userCommand = Console.ReadLine().ToUpper();
                 if (userCommand == "START")
                 {
@@ -29,12 +29,12 @@ namespace CarStartAndStop
                     command = true;
                     if (PresentStatus() == command)
                     {
-                        Console.WriteLine("Its allready started !");
+                        Console.WriteLine(Messages.AlreadyStartMessage);
 
                     }
                     else
                     {
-                        Console.WriteLine("Started");
+                        Console.WriteLine(Messages.StartMessage);
                         MarkStatus(command);
                     }
                 }
@@ -44,12 +44,12 @@ namespace CarStartAndStop
                     command = false;
                     if (PresentStatus() == command)
                     {
-                        Console.WriteLine("Its allready Stopped !");
+                        Console.WriteLine(Messages.AlreadyStopMessage);
 
                     }
                     else
                     {
-                        Console.WriteLine("Stoped");
+                        Console.WriteLine(Messages.StopMessage);
                         MarkStatus(command);
                     }
                 }
