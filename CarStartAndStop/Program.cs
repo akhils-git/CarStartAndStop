@@ -16,18 +16,19 @@ namespace CarStartAndStop
         static void Main(string[] args)
         {
             string userCommand = string.Empty;
-            presentCarState = PresentStatus();
+            presentCarState = PresentCarStatus();
 
             while (1 == 1)
             {
                 Console.Clear();
                 Console.Write(Messages.UserMessage);
                 userCommand = Console.ReadLine().ToUpper();
+
                 if (userCommand == "START")
                 {
 
                     command = true;
-                    if (PresentStatus() == command)
+                    if (PresentCarStatus() == command)
                     {
                         Console.WriteLine(Messages.AlreadyStartMessage);
 
@@ -35,14 +36,14 @@ namespace CarStartAndStop
                     else
                     {
                         Console.WriteLine(Messages.StartMessage);
-                        MarkStatus(command);
+                        MarkStatusToFile(command);
                     }
                 }
                 else if (userCommand == "STOP")
                 {
 
                     command = false;
-                    if (PresentStatus() == command)
+                    if (PresentCarStatus() == command)
                     {
                         Console.WriteLine(Messages.AlreadyStopMessage);
 
@@ -50,7 +51,7 @@ namespace CarStartAndStop
                     else
                     {
                         Console.WriteLine(Messages.StopMessage);
-                        MarkStatus(command);
+                        MarkStatusToFile(command);
                     }
                 }
                 else if (userCommand == "EXIT")
@@ -61,7 +62,7 @@ namespace CarStartAndStop
             }
 
         }
-        static private void MarkStatus(bool status)
+        static private void MarkStatusToFile(bool status)
         {
             if (!File.Exists(statusStorageFilePath) && status == true)
             {
@@ -72,7 +73,7 @@ namespace CarStartAndStop
                 File.WriteAllText(statusStorageFilePath, "Stopped");
             }
         }
-        static private bool PresentStatus()
+        static private bool PresentCarStatus()
         {
             if (File.Exists(statusStorageFilePath))
             {
