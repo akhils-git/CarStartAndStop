@@ -15,7 +15,7 @@ namespace CarStartAndStop
         static bool command;
         static void Main(string[] args)
         {
-            string a = CarStatus.START.ToString();
+
             string userCommand = string.Empty;
             presentCarState = PresentCarStatus();
 
